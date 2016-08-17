@@ -11,8 +11,8 @@ import java.util.stream.Stream;
  */
 public class StreamStudy4 {
     public static void main(String[] args) {
-        List<String> list = new ArrayList<String>(Arrays.asList("a", "bb", "cccc"));
-        //注意Stream可以添加泛型
+        List<String> list = new ArrayList<String>(Arrays.asList("bb", "a", "cccc"));
+        // 注意Stream可以添加泛型
         Stream<String> stream = list.stream();
         // System.out.println(stream.anyMatch(s -> s.equals("bb")));
         // System.out.println(stream.allMatch(s -> s.equals("bb")));
@@ -66,6 +66,40 @@ public class StreamStudy4 {
         //获取最大值
         // Optional maxOptionnal = stream.max((String s1,String s2) -> s1.length()-s2.length());
         // System.out.println(maxOptionnal.get());
+
+        //返回原有的Stream，并给Stream中的每个元素绑定一个消费函数，当每个元素被消费之前都会执行消费函数
+        // Stream<String> peekStream = stream.peek((s) -> {
+        //     System.out.println(s+"1");
+        // });
+        // peekStream.forEach(s -> System.out.println(s));
+
+        //排序
+        // Stream<String> sortedStream = stream.sorted((s1,s2) -> s2.compareTo(s1));
+        // sortedStream.forEach(s -> System.out.println(s));
+
+        //转换为数组
+        // Object[] objects = stream.toArray();
+        // for (int i = 0; i < objects.length; i++) {
+        //     Object object = objects[i];
+        //     System.out.println(object);
+        // }
+
+
+        /**
+         * collect 接收3个参数
+         * 1、Supplier<R> supplier --创建一个新的容器（使用并发流的时候注意会被多次调用）
+         * 2、BiConsumer<R,? super T> accumulator --Stream中的元素添加到一个容器中
+         * 3、BiConsumer<R,R> combiner) --合并上面两个容器
+         */
+        // List<Integer> nums = Arrays.asList(1, 1, null, 2, 3, 4, null, 5, 6, 7, 8, 9, 10);
+        // // List<Integer> numsWithoutNull = nums.stream().filter(num -> num != null).
+        // //         collect(() -> new ArrayList<Integer>(),
+        // //                 (list, item) -> list.add(item),
+        // //                 (list1, list2) -> list1.addAll(list2));
+        // List<Integer> numsWithoutNull = nums.stream().filter(num -> num != null).
+        //         collect(Collectors.toList());
+        // numsWithoutNull.forEach(s -> System.out.println(s));
+
 
 
     }
